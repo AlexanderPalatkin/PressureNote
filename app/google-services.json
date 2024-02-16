@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "243715580773",
+    "project_id": "pressurenote",
+    "storage_bucket": "pressurenote.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:243715580773:android:9020538b94f09219b3778c",
+        "android_client_info": {
+          "package_name": "com.example.pressurenote"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI8ajKxDeH3RVruEEzwsqDV-5-Pzwaqtw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
