@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="offset_16dp">16dp</dimen>
+    <dimen name="offset_24sp">24sp</dimen>
+    <dimen name="offset_20sp">20sp</dimen>
+    <dimen name="indication_pulse_padding_horiz">20dp</dimen>
+    <dimen name="tv_date_text_size">20sp</dimen>
+    <dimen name="tv_date_padding">8dp</dimen>
+</resources>

@@ -2,4 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#4C4C4C</color>
+    <color name="tv_date_background">#9C9C9C</color>
 </resources>
