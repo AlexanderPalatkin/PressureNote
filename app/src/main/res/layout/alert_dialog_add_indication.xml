@@ -75,6 +75,7 @@
             android:layout_width="@dimen/btn_alert_dialog_width"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/offset_8"
+            style="@android:attr/buttonBarButtonStyle"
             android:text="@string/add_indication" />
 
         <Button
@@ -82,6 +83,7 @@
             android:layout_width="116dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/offset_8"
+            style="@android:attr/buttonBarButtonStyle"
             android:text="@string/cancel" />
     </LinearLayout>
 
