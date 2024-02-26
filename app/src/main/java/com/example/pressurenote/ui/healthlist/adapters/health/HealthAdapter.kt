@@ -1,4 +1,4 @@
-package com.example.pressurenote.ui.healthlist.adapters
+package com.example.pressurenote.ui.healthlist.adapters.health
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,21 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pressurenote.databinding.HealthRecyclerItemBinding
+import com.example.pressurenote.di.IndicationAdapterProvider
 import com.example.pressurenote.model.Health
+import com.example.pressurenote.model.Indication
 import javax.inject.Inject
 
-class HealthAdapter @Inject constructor(private val adapter: IndicationAdapter) :
+class HealthAdapter @Inject constructor(
+    private val indicationAdapterProvider: IndicationAdapterProvider
+) :
     RecyclerView.Adapter<HealthAdapter.HealthViewHolder>() {
+
+    private var onItemClickListener: ((Indication) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Indication) -> Unit) {
+        onItemClickListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HealthViewHolder {
         val binding = HealthRecyclerItemBinding.inflate(
@@ -18,7 +28,7 @@ class HealthAdapter @Inject constructor(private val adapter: IndicationAdapter) 
             parent,
             false
         )
-        return HealthViewHolder(binding, adapter)
+        return HealthViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: HealthViewHolder, position: Int) {
@@ -28,14 +38,19 @@ class HealthAdapter @Inject constructor(private val adapter: IndicationAdapter) 
     override fun getItemCount(): Int = differ.currentList.size
 
     inner class HealthViewHolder(
-        private val binding: HealthRecyclerItemBinding,
-        private val adapter: IndicationAdapter
+        private val binding: HealthRecyclerItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(health: Health) {
             binding.apply {
                 tvDate.text = health.date
-                adapter.differ.submitList(health.indications)
-                rvIndications.adapter = adapter
+                rvIndications.adapter = indicationAdapterProvider.get().apply {
+                    differ.submitList(health.indications)
+                    this.setOnItemClickListener { indication ->
+                        onItemClickListener?.let {
+                            it(indication)
+                        }
+                    }
+                }
             }
         }
     }

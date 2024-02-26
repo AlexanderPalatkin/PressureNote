@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="offset_16dp">16dp</dimen>
+    <dimen name="zero">0dp</dimen>
+    <dimen name="offset_2">2dp</dimen>
+    <dimen name="offset_4">4dp</dimen>
+    <dimen name="offset_8">8dp</dimen>
+    <dimen name="offset_16">16dp</dimen>
+    <dimen name="offset_24">24dp</dimen>
+    <dimen name="offset_32">32dp</dimen>
+    <dimen name="offset_16sp">16sp</dimen>
     <dimen name="offset_24sp">24sp</dimen>
     <dimen name="offset_20sp">20sp</dimen>
     <dimen name="indication_pulse_padding_horiz">20dp</dimen>
     <dimen name="tv_date_text_size">20sp</dimen>
     <dimen name="tv_date_padding">8dp</dimen>
+    <dimen name="btn_alert_dialog_width">116dp</dimen>
+    <dimen name="offset_64">64dp</dimen>
+    <dimen name="tv_empty_health_list_text_size">18sp</dimen>
 </resources>

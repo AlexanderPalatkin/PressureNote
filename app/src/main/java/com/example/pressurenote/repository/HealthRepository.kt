@@ -1,8 +1,8 @@
 package com.example.pressurenote.repository
 
+import com.example.pressurenote.model.AppState
 import com.example.pressurenote.model.Health
 import com.example.pressurenote.model.Indication
-import com.example.pressurenote.utils.Utils.getDate
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -12,7 +12,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class HealthRepository @Inject constructor(private val db: DatabaseReference) {
-    suspend fun getHealth(): List<Health> {
+    suspend fun getHealth(): AppState<List<Health>, DatabaseError> {
         return suspendCoroutine { continuation ->
             db.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -25,17 +25,25 @@ class HealthRepository @Inject constructor(private val db: DatabaseReference) {
                         }
                         list.add(Health(date, indications.asReversed()))
                     }
-                    continuation.resume(list)
+                    continuation.resume(AppState.Success(list))
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-
+                    continuation.resume(AppState.Error(error))
                 }
             })
         }
     }
 
-    fun setIndications(indication: Indication) {
-            db.child(getDate()).push().setValue(indication)
+    fun setIndication(indication: Indication) {
+        indication.date?.let {
+            db.child(indication.date).child(indication.id).setValue(indication)
         }
     }
+
+    fun deleteIndication(indication: Indication) {
+        indication.date?.let {
+            db.child(indication.date).child(indication.id).removeValue()
+        }
+    }
+}

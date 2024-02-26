@@ -1,4 +1,4 @@
-package com.example.pressurenote.ui.healthlist.adapters
+package com.example.pressurenote.ui.healthlist.adapters.indication
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,6 +13,12 @@ class IndicationAdapter @Inject constructor() :
     RecyclerView.Adapter<IndicationAdapter.IndicationViewHolder>() {
 
     private lateinit var binding: IndicationRecyclerItemBinding
+
+    private var onItemClickListener : ((Indication) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (Indication) -> Unit) {
+        onItemClickListener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IndicationViewHolder {
         binding = IndicationRecyclerItemBinding.inflate(
@@ -38,6 +44,12 @@ class IndicationAdapter @Inject constructor() :
                 indicationUpperPressure.text = indication.upperPressure.toString()
                 indicationLowerPressure.text = indication.lowerPressure.toString()
                 indicationPulse.text = indication.pulse.toString()
+
+                ivDeleteIndication.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(indication)
+                    }
+                }
             }
         }
     }
